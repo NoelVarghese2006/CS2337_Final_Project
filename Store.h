@@ -9,11 +9,14 @@ class Store
 {
     public:
         Store(int m=0, int c=0);
+        //modifiers
         void buyItems(string str = "", int i = 0);
-        void summary();
+        //accessors
+        int getCash();
 
+        void summary();
     private:
-        //vector<Item> items;
+        vector<Item> items;
         int maxCapacity;
         int currCapacity;
         int cash;
