@@ -8,16 +8,17 @@ Store::Store(int m, int c)
     maxCapacity = m;
     cash = c;
     currCapacity = 0;
-    items.push_back(Item("Electronics", 0.00, 0.00, 500.0));
-    items.push_back(Item("Furniture", 0.00, 0.00, 300.0));
-    items.push_back(Item("Outdoors", 0.00, 0.00, 100.0));
-    items.push_back(Item("Clothes", 0.00, 0.00, 50.0));
-    items.push_back(Item("Health", 0.00, 0.00, 40.0));
-    items.push_back(Item("Toys", 0.00, 0.00, 30.0));
-    items.push_back(Item("Groceries", 0.00, 0.00, 20.0));
-    items.push_back(Item("Office", 0.00, 0.00, 10.0));
+    items.push_back(Item("Electronics", 550.00, 550.00, 500.0));
+    items.push_back(Item("Furniture", 330.00, 330.00, 300.0));
+    items.push_back(Item("Outdoors", 110.00, 110.00, 100.0));
+    items.push_back(Item("Clothes", 55.00, 55.00, 50.0));
+    items.push_back(Item("Health", 44.00, 44.00, 40.0));
+    items.push_back(Item("Toys", 33.00, 33.00, 30.0));
+    items.push_back(Item("Groceries", 22.00, 22.00, 20.0));
+    items.push_back(Item("Office", 11.00, 11.00, 10.0));
     
 }
+
 string Store::buyItems(string str, int c)
 {
     for(int i = 0; i<items.size(); i++)
@@ -45,9 +46,32 @@ string Store::buyItems(string str, int c)
     return "Catagory [" + str +  "] DNE!\n";
 }
 
+void Store::setPrice(string str, double np)
+{
+    for(Item& i : items)
+    {
+        if(i.getName() == str)
+        {
+            i.setPrice(np);
+        }
+    }
+}
+
 int Store::getCash()
 {
     return cash;
+}
+
+double Store::getEqualibrium(string str)
+{
+    for(Item i : items)
+    {
+        if(i.getName() == str)
+        {
+            return i.getEqualibrium();
+        }
+    }
+    return -1;
 }
 
 void Store::summary()

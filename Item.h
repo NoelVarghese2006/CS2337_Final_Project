@@ -3,6 +3,7 @@
 
 #include <string>
 #include <map>
+#include <iostream>
 
 
 using namespace std;
@@ -17,7 +18,7 @@ class Item
         double getEqualibrium();
         int getCount();
 
-        void setPrice();
+        void setPrice(int np);
         void addCount(int c);
 
         
