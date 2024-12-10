@@ -18,6 +18,10 @@ Store::Store(int m, int c)
     items.push_back(Item("Office", 0.00, 0.00, 10.0));
     
 }
+bool Store::buyItems(string str, int c)
+{
+    
+}
 int Store::getCash()
 {
     return cash;
