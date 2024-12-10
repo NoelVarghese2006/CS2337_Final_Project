@@ -23,6 +23,8 @@ int main()
     string options;
     options = "Options:\n";
     options += "1. Enter [q] to quit\n";
+    options += "2. Enter [s] to check your summary\n";
+    options += "3. Enter [b] to buy items\n";
     options += "Task: ";
     while(!quit)
     {
@@ -35,6 +37,32 @@ int main()
         {
             cout << "Profit: " << to_string(myStore.getCash() - mC);
             quit = true;
+        }
+        else if(keyword == "s")
+        {
+            cout << "Enter [stocks] to check your shelves.\n";
+            cout << "Enter [costs] to check that statistics for the items.\n";
+            cout << "Task: ";
+            string cat;
+            cin >> cat;
+            if(cat == "stocks")
+            {
+                myStore.summary();
+            }
+            else if(cat == "costs")
+            {
+                myStore.itemSummary();
+            }
+        }
+        else if(keyword == "b")
+        {
+            cout << "Enter the catagory you want to buy: ";
+            string cat;
+            cin >> cat;
+            cout << "How many?: ";
+            int count;
+            cin >> count;
+            cout << myStore.buyItems(cat, count);
         }
     }
     return 0;

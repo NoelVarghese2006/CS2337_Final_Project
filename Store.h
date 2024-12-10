@@ -10,11 +10,12 @@ class Store
     public:
         Store(int m=0, int c=0);
         //modifiers
-        bool buyItems(string str = "", int i = 0);
+        string buyItems(string str = "", int i = 0);
         //accessors
         int getCash();
 
         void summary();
+        void itemSummary();
     private:
         vector<Item> items;
         int maxCapacity;

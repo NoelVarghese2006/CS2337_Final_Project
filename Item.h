@@ -12,9 +12,15 @@ class Item
     public:
         Item(string str = "", double p = 0.00, double e = 0.00, double s = 0.00);
         string getName();
+        double getSupplyCost();
         double getPrice();
-        void setPrice();
         double getEqualibrium();
+        int getCount();
+
+        void setPrice();
+        void addCount(int c);
+
+        
 
 
 
@@ -23,6 +29,7 @@ class Item
         double price;
         double equalibrium;
         double supplyCost;
+        int count;
         map<string, double> events;
 
 };

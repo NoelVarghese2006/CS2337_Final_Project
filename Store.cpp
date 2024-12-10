@@ -18,18 +18,55 @@ Store::Store(int m, int c)
     items.push_back(Item("Office", 0.00, 0.00, 10.0));
     
 }
-bool Store::buyItems(string str, int c)
+string Store::buyItems(string str, int c)
 {
-    
+    for(int i = 0; i<items.size(); i++)
+    {
+        if(items.at(i).getName() == str)
+        {
+            if(currCapacity + c > maxCapacity)
+            {
+                return "Too many items! Only [" + to_string(maxCapacity - currCapacity) + "] slots left.\n";
+            }
+            int cost = c * items[i].getSupplyCost();
+            if(cash < cost)
+            {
+                return "Not enough money! Only $[" + to_string(cash) + "] remaining.\n";
+            }
+            else
+            {
+                currCapacity += c;
+                items[i].addCount(c);
+                cash -= cost;
+                return "Transaction Completed, Check the summary to check your finances.\n";
+            }
+        }
+    }
+    return "Catagory [" + str +  "] DNE!\n";
 }
+
 int Store::getCash()
 {
     return cash;
 }
+
 void Store::summary()
 {
-    string a = "";
-    cout << "SUMMARY\n";
-    cout << "=======\n";
+    cout << "STORE\n";
+    cout << "=====\n";
     cout << "CASH: " << to_string(cash) << "\n";
+    for(Item i : items)
+    {
+        cout << i.getName() << ": " << i.getCount() << endl;
+    }
+}
+
+void Store::itemSummary()
+{
+    cout << "CATAGORY    SUPPLY_PRICE     PRICE    EQUALIBRIUM\n";
+    cout << "=================================================\n";
+    for(Item i : items)
+    {
+        cout << i.getName() << ": " << i.getSupplyCost() << ", " << i.getPrice() << ", " << i.getEqualibrium() << endl;
+    }
 }

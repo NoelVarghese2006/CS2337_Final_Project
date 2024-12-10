@@ -7,8 +7,29 @@ Item::Item(string str, double p, double e, double s)
     price = p;
     equalibrium = e;
     supplyCost = s;
+    count = 0;
 }
-string getName();
-double getPrice();
-void setPrice();
-double getEqualibrium();
+string Item::getName()
+{
+    return typeName;
+}
+double Item::getSupplyCost()
+{
+    return supplyCost;
+}
+int Item::getCount()
+{
+    return count;
+}
+double Item::getEqualibrium()
+{
+    return equalibrium;
+}
+double Item::getPrice()
+{
+    return price;
+}
+void Item::addCount(int c)
+{
+    count += c;
+}
