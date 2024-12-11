@@ -2,6 +2,7 @@
 #define STORE_H
 #include <vector>
 #include "Item.h"
+#include "Events.h"
 
 using namespace std;
 
@@ -12,16 +13,20 @@ class Store
         //modifiers
         string buyItems(string str = "", int i = 0);
         void setPrice(string str = "", double np = 0);
+        void simulation();
         //accessors
-        int getCash();
+        double getCash();
         double getEqualibrium(string str = "");
+        double getPrice(string str);
 
         void summary();
         void itemSummary();
     private:
+        Events event;
         vector<Item> items;
         int maxCapacity;
         int currCapacity;
-        int cash;
+        double cash;
+        int people;
 };
 #endif

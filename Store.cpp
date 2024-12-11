@@ -8,13 +8,14 @@ Store::Store(int m, int c)
     maxCapacity = m;
     cash = c;
     currCapacity = 0;
+    people = 500;
     items.push_back(Item("Electronics", 550.00, 550.00, 500.0));
     items.push_back(Item("Furniture", 330.00, 330.00, 300.0));
     items.push_back(Item("Outdoors", 110.00, 110.00, 100.0));
-    items.push_back(Item("Clothes", 55.00, 55.00, 50.0));
-    items.push_back(Item("Health", 44.00, 44.00, 40.0));
+    items.push_back(Item("Clothing", 77.00, 77.00, 70.0));
+    items.push_back(Item("Health", 66.00, 66.00, 60.0));
     items.push_back(Item("Toys", 33.00, 33.00, 30.0));
-    items.push_back(Item("Groceries", 22.00, 22.00, 20.0));
+    items.push_back(Item("Groceries", 16.5, 16.5, 15.0));
     items.push_back(Item("Office", 11.00, 11.00, 10.0));
     
 }
@@ -57,7 +58,39 @@ void Store::setPrice(string str, double np)
     }
 }
 
-int Store::getCash()
+void Store::simulation()
+{
+    int oldCash = cash;
+    int oldCounts[8];
+    for(int i = 0; i<items.size(); i++)
+    {
+        oldCounts[i] = items.at(i).getCount();
+        for(int j = 0; j<4; j++)
+        {
+            int sales = event.runWeek(500, items[i]);
+            if(sales > items.at(i).getCount())
+            {
+                sales = items.at(i).getCount();
+            }
+            if(sales > 0)
+            {
+                cout << "SALES: " << sales << endl;
+            }
+            items.at(i).addCount(-sales);
+            cash += sales * items.at(i).getPrice();
+        }
+    }
+    cout << "SIMULATION RESULTS\n";
+    cout << "==================\n";
+    cout << "Cash: $" << oldCash << " -> $" << cash << endl;
+    for(int i = 0; i<8; i++)
+    {
+        cout << items[i].getName() << ": " << oldCounts[i] << " -> " << items[i].getCount() << endl;
+    }
+
+}
+
+double Store::getCash()
 {
     return cash;
 }
@@ -72,6 +105,17 @@ double Store::getEqualibrium(string str)
         }
     }
     return -1;
+}
+
+double Store::getPrice(string str)
+{
+    for(Item i : items)
+    {
+        if(i.getName() == str)
+        {
+            return i.getPrice();
+        }
+    }
 }
 
 void Store::summary()

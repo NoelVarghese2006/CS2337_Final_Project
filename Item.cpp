@@ -36,5 +36,4 @@ void Item::addCount(int c)
 void Item::setPrice(int np)
 {
     price = np;
-    cout << "NEW PRICE" << price << endl;
 }

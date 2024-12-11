@@ -26,6 +26,8 @@ int main()
     options += "2. Enter [s] to check your summary\n";
     options += "3. Enter [b] to buy items\n";
     options += "4. Enter [p] to set a price\n";
+    options += "5. Enter [x] to skip forward one month\n";
+    
     options += "Task: ";
     while(!quit)
     {
@@ -71,6 +73,7 @@ int main()
             string cat;
             cin >> cat;
             double eb = myStore.getEqualibrium(cat);
+            double p = myStore.getPrice(cat);
             if(eb < 0)
             {
                 cout << "[" << cat << "] is not a catagory\n";
@@ -78,12 +81,17 @@ int main()
             else
             {
                 cout << "Current Market Value is: " + to_string(eb) << endl;
+                cout << "Current Price is: " + to_string(p) << endl;
                 cout << "New Price: ";
                 int count;
                 cin >> count;
                 myStore.setPrice(cat, count);
                 cout << "Price Change Completed\n";
             }
+        }
+        else if(keyword == "x")
+        {
+            myStore.simulation();
         }
     }
     return 0;
