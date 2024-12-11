@@ -9,6 +9,7 @@ int mC = 100000;
 
 int main()
 {
+    int week = 4;
     bool quit = false;
     //Intro Text
     cout << "Hello!\n";
@@ -21,17 +22,18 @@ int main()
 
     //Setup of the option text
     string options;
-    options = "Options:\n";
+    options = "Week " + to_string(week) + ":\n";
     options += "1. Enter [q] to quit\n";
     options += "2. Enter [s] to check your summary\n";
     options += "3. Enter [b] to buy items\n";
     options += "4. Enter [p] to set a price\n";
-    options += "5. Enter [x] to skip forward one month\n";
+    options += "5. Enter [x] to skip forward one week\n";
     
     options += "Task: ";
     while(!quit)
     {
         string keyword;
+        options[5] = 48 + week;
         cout << options;
         cin >> keyword;
         
@@ -59,23 +61,29 @@ int main()
         }
         else if(keyword == "b")
         {
-            cout << "One Catagory? Enter [c]; or all catagories? Enter [a]: ";
-            cin >> keyword;
-            if(keyword == "c")
+            if(week != 4)
             {
-                cout << "Enter the catagory you want to buy: ";
-                string cat;
-                cin >> cat;
-                cout << "How many?: ";
-                int count;
-                cin >> count;
-                myStore.buyItems(cat, count);
+                cout << "Wait until week 4.\n";
             }
-            else if(keyword == "a")
+            else
             {
-                myStore.buyAll();
-            }
-            
+                cout << "One Catagory? Enter [c]; or all catagories? Enter [a]: ";
+                cin >> keyword;
+                if(keyword == "c")
+                {
+                    cout << "Enter the catagory you want to buy: ";
+                    string cat;
+                    cin >> cat;
+                    cout << "How many?: ";
+                    int count;
+                    cin >> count;
+                    myStore.buyItems(cat, count);
+                }
+                else if(keyword == "a")
+                {
+                    myStore.buyAll();
+                }
+            }            
         }
         else if(keyword == "p")
         {
@@ -102,6 +110,14 @@ int main()
         else if(keyword == "x")
         {
             myStore.simulation();
+            if(week == 4)
+            {
+                week = 1;
+            }
+            else
+            {
+                week++;
+            }
         }
     }
     return 0;
