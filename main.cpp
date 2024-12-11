@@ -15,8 +15,18 @@ int main()
     cout << "Hello!\n";
     cout << "This is a simulation of a store. The goal is to gain a profit.\n";
     cout << "Every month, you will be given an option to buy items from the supply chain and set the price of current in stock.\n";
-    cout << "There will also be a random event at the end of each month that may affect supply or demand.\n";
+    cout << "There will also be a random event at the end of each month that may affect supply or demand.\n\n";
 
+    cout << "Enter [h] for more information on how the game works.\n";
+    cout << "Enter any other key to start: ";
+    string temp;
+    cin >> temp;
+    if(temp == "h")
+    {
+        cout << "Ill do this later\n";
+        cout << "Enter any key to continue: ";
+        cin >> temp;
+    }
     //Max Capacity of 100k items, starting cash of $100k
     Store myStore(mC, mC);
 
@@ -24,7 +34,7 @@ int main()
     string options;
     options = "Week " + to_string(week) + ":\n";
     options += "1. Enter [q] to quit\n";
-    options += "2. Enter [s] to check your summary\n";
+    options += "2. Enter [c] to check your summary\n";
     options += "3. Enter [b] to buy items\n";
     options += "4. Enter [p] to set a price\n";
     options += "5. Enter [x] to skip forward one week\n";
@@ -43,7 +53,7 @@ int main()
             cout << "Profit: " << to_string(myStore.getCash() - mC);
             quit = true;
         }
-        else if(keyword == "s")
+        else if(keyword == "c")
         {
             cout << "Enter [stocks] to check your shelves.\n";
             cout << "Enter [costs] to check that statistics for the items.\n";
