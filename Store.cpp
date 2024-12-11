@@ -67,7 +67,7 @@ void Store::simulation()
         oldCounts[i] = items.at(i).getCount();
         for(int j = 0; j<4; j++)
         {
-            int sales = event.runWeek(500, items[i]);
+            int sales = event.runWeek(people, items[i]);
             if(sales > items.at(i).getCount())
             {
                 sales = items.at(i).getCount();
@@ -116,6 +116,7 @@ double Store::getPrice(string str)
             return i.getPrice();
         }
     }
+    return -1;
 }
 
 void Store::summary()
