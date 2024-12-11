@@ -10,6 +10,18 @@ Events::Events()
     pFrequency.insert({"Office", 0.962});
     pFrequency.insert({"Toys", 0.192});
     pFrequency.insert({"Outdoors", 0.115});
+
+
+    map<string, double> map0;
+    map0.emplace("Cash", 1.5);
+    randEvs.emplace("Bonus from CEO", map0);
+    eventID.emplace(0, "Bonus from CEO");
+
+    map<string, double> map1;
+    map1.emplace("Cash", .5);
+    randEvs.emplace("IRS Tax Claim", map1);
+    eventID.emplace(1, "IRS Tax Claim");
+
 }
 
 double Events::getFrequency(string str)
@@ -53,4 +65,14 @@ double Events::runWeek(int ppl, Item& item)
         }
     }
     return numSold;
+}
+
+map<string, double> Events::randomEvent()
+{
+    random_device rd;
+    default_random_engine generator(rd());
+    uniform_int_distribution<int> distribution(0, 1);
+    cout << distribution(generator);
+    map<string, double> hey;
+    return hey;
 }

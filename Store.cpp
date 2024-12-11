@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <map>
 
 Store::Store(int m, int c)
 {
@@ -135,6 +136,11 @@ void Store::simulation()
     if(lowC < 0)
         cout << "Shoppers couldn't find [" << catLow <<  "] " << lowC << " people.\n";
 
+}
+
+void Store::random()
+{
+    event.randomEvent();
 }
 
 int Store::getPeople()

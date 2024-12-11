@@ -19,3 +19,7 @@ Plan
    Toys: 10 -> 5.2
    Outdoors: 6 -> 11.6
    Office: 50 -> 96.1
+
+5. Random Events
+- Lose Space - 1/2
+- Gain Space - 3/2

@@ -15,6 +15,7 @@ class Store
         void buyAll();
         void setPrice(string str = "", double np = 0);
         void simulation();
+        void random();
         void setPeople(int c);
         void addPeople(int c);
         //accessors
