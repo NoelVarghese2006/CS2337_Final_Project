@@ -8,7 +8,7 @@ Store::Store(int m, int c)
     maxCapacity = m;
     cash = c;
     currCapacity = 0;
-    people = 500;
+    people = 100;
     items.push_back(Item("Electronics", 550.00, 550.00, 500.0));
     items.push_back(Item("Furniture", 330.00, 330.00, 300.0));
     items.push_back(Item("Outdoors", 110.00, 110.00, 100.0));
@@ -95,7 +95,7 @@ void Store::simulation()
     {
         oldCounts[i] = items.at(i).getCount();
         int sales = event.runWeek(people, items[i]);
-        pplChanges[i] = (items.at(i).getCount() - sales)/event.getFrequency(items.at(i).getName());
+        pplChanges[i] = (items.at(i).getCount() - sales)/(10 * event.getFrequency(items.at(i).getName()));
         if(sales > items.at(i).getCount())
         {
             sales = items.at(i).getCount();
