@@ -59,13 +59,23 @@ int main()
         }
         else if(keyword == "b")
         {
-            cout << "Enter the catagory you want to buy: ";
-            string cat;
-            cin >> cat;
-            cout << "How many?: ";
-            int count;
-            cin >> count;
-            cout << myStore.buyItems(cat, count);
+            cout << "One Catagory? Enter [c]; or all catagories? Enter [a]: ";
+            cin >> keyword;
+            if(keyword == "c")
+            {
+                cout << "Enter the catagory you want to buy: ";
+                string cat;
+                cin >> cat;
+                cout << "How many?: ";
+                int count;
+                cin >> count;
+                myStore.buyItems(cat, count);
+            }
+            else if(keyword == "a")
+            {
+                myStore.buyAll();
+            }
+            
         }
         else if(keyword == "p")
         {

@@ -20,7 +20,7 @@ Store::Store(int m, int c)
     
 }
 
-string Store::buyItems(string str, int c)
+void Store::buyItems(string str, int c)
 {
     for(int i = 0; i<items.size(); i++)
     {
@@ -28,23 +28,40 @@ string Store::buyItems(string str, int c)
         {
             if(currCapacity + c > maxCapacity)
             {
-                return "Too many items! Only [" + to_string(maxCapacity - currCapacity) + "] slots left.\n";
+                cout << "Too many items! Only [" + to_string(maxCapacity - currCapacity) + "] slots left.\n";
+                return;
             }
             int cost = c * items[i].getSupplyCost();
             if(cash < cost)
             {
-                return "Not enough money! Only $[" + to_string(cash) + "] remaining.\n";
+                cout << "Not enough money! Only $[" + to_string(cash) + "] remaining.\n";
+                return;
             }
             else
             {
                 currCapacity += c;
                 items[i].addCount(c);
                 cash -= cost;
-                return "Transaction Completed, Check the summary to check your finances.\n";
+                cout << "Transaction Completed, $[" + to_string(cash) + "] remaining.\n";
+                return;
             }
         }
     }
-    return "Catagory [" + str +  "] DNE!\n";
+    cout << "Catagory [" + str +  "] DNE!\n";
+    return;
+}
+
+void Store::buyAll()
+{
+    string cat = "";
+    int count;
+    for(Item& i : items)
+    {
+        cat = i.getName();
+        cout << "How many [" << cat << "] do you want: ";
+        cin >> count;
+        buyItems(cat, count);
+    }
 }
 
 void Store::setPrice(string str, double np)
@@ -116,7 +133,6 @@ void Store::simulation()
     cout << "Shoppers: " << oldPeople << " -> " << people << endl;
     cout << "Shoppers love the abundance of [" << catHigh << "] +" << highC << " people!\n";
     if(lowC < 0)
-        if(-lowC > oldPeople)
         cout << "Shoppers couldn't find [" << catLow <<  "] " << lowC << " people.\n";
 
 }
