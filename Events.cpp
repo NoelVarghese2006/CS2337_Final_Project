@@ -12,6 +12,11 @@ Events::Events()
     pFrequency.insert({"Outdoors", 0.115});
 }
 
+double Events::getFrequency(string str)
+{
+    return pFrequency.at(str);
+}
+
 double Events::runWeek(int ppl, Item& item)
 {
     double e = item.getEqualibrium();

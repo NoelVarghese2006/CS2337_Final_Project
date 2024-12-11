@@ -58,28 +58,54 @@ void Store::setPrice(string str, double np)
     }
 }
 
+void Store::setPeople(int c)
+{
+    people = c;
+}
+
+void Store::addPeople(int c)
+{
+    people += c;
+}
+
 void Store::simulation()
 {
     int oldCash = cash;
     int oldCounts[8];
+    int oldPeople = people;
+    int pplChanges[8];
     for(int i = 0; i<items.size(); i++)
     {
         oldCounts[i] = items.at(i).getCount();
-        for(int j = 0; j<4; j++)
+        int sales = event.runWeek(people, items[i]);
+        pplChanges[i] = (items.at(i).getCount() - sales)/event.getFrequency(items.at(i).getName());
+        if(sales > items.at(i).getCount())
         {
-            int sales = event.runWeek(people, items[i]);
-            if(sales > items.at(i).getCount())
-            {
-                sales = items.at(i).getCount();
-            }
-            if(sales > 0)
-            {
-                cout << "SALES: " << sales << endl;
-            }
-            items.at(i).addCount(-sales);
-            cash += sales * items.at(i).getPrice();
+            sales = items.at(i).getCount();
         }
+        items.at(i).addCount(-sales);
+        cash += sales * items.at(i).getPrice();
     }
+    string catLow;
+    int lowC = 0;
+    string catHigh;
+    int highC = 0;
+    for(int i = 0; i < 8; i++)
+    {
+        people += pplChanges[i];
+        if(pplChanges[i] < lowC)
+        {
+            catLow = items.at(i).getName();
+            lowC = pplChanges[i];
+        }
+        if(pplChanges[i] > highC)
+        {
+            catHigh = items.at(i).getName();
+            highC = pplChanges[i];
+        }   
+    }
+    if(people < 1)
+        people = 1;
     cout << "SIMULATION RESULTS\n";
     cout << "==================\n";
     cout << "Cash: $" << oldCash << " -> $" << cash << endl;
@@ -87,7 +113,17 @@ void Store::simulation()
     {
         cout << items[i].getName() << ": " << oldCounts[i] << " -> " << items[i].getCount() << endl;
     }
+    cout << "Shoppers: " << oldPeople << " -> " << people << endl;
+    cout << "Shoppers love the abundance of [" << catHigh << "] +" << highC << " people!\n";
+    if(lowC < 0)
+        if(-lowC > oldPeople)
+        cout << "Shoppers couldn't find [" << catLow <<  "] " << lowC << " people.\n";
 
+}
+
+int Store::getPeople()
+{
+    return people;
 }
 
 double Store::getCash()

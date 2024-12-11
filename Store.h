@@ -14,8 +14,11 @@ class Store
         string buyItems(string str = "", int i = 0);
         void setPrice(string str = "", double np = 0);
         void simulation();
+        void setPeople(int c);
+        void addPeople(int c);
         //accessors
         double getCash();
+        int getPeople();
         double getEqualibrium(string str = "");
         double getPrice(string str);
 

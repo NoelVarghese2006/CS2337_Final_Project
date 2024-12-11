@@ -13,6 +13,7 @@ class Events
     public:
         Events();
         double runWeek(int ppl, Item& i);
+        double getFrequency(string str);
     private:
         map<string, double> pFrequency;
 
