@@ -132,7 +132,8 @@ void Store::simulation()
         cout << items[i].getName() << ": " << oldCounts[i] << " -> " << items[i].getCount() << endl;
     }
     cout << "Shoppers: " << oldPeople << " -> " << people << endl;
-    cout << "Shoppers love the abundance of [" << catHigh << "] +" << highC << " people!\n";
+    if(highC > 0)
+        cout << "Shoppers love the abundance of [" << catHigh << "] +" << highC << " people!\n";
     if(lowC < 0)
         cout << "Shoppers couldn't find [" << catLow <<  "] " << lowC << " people.\n";
 
@@ -140,7 +141,21 @@ void Store::simulation()
 
 void Store::random()
 {
-    event.randomEvent();
+    map<string, double> mods = event.randomEvent();
+    auto isCash = mods.find("Cash");
+    if(isCash != mods.end())
+    {
+        cout << "Cash: " << cash;
+        cash *= isCash->second;
+        cout << " -> " << cash << endl;
+    }
+    auto isMaxCap = mods.find("Max Capacity");
+    if(isMaxCap != mods.end())
+    {
+        cout << "Max Capacity: " << maxCapacity;
+        maxCapacity *= isMaxCap->second;
+        cout << " -> " << maxCapacity << endl;
+    }
 }
 
 int Store::getPeople()

@@ -13,14 +13,24 @@ Events::Events()
 
 
     map<string, double> map0;
-    map0.emplace("Cash", 1.5);
+    map0.emplace("Cash", 1.1);
     randEvs.emplace("Bonus from CEO", map0);
     eventID.emplace(0, "Bonus from CEO");
 
     map<string, double> map1;
-    map1.emplace("Cash", .5);
+    map1.emplace("Cash", .9);
     randEvs.emplace("IRS Tax Claim", map1);
     eventID.emplace(1, "IRS Tax Claim");
+
+    map<string, double> map2;
+    map2.emplace("Max Capacity", 1.1);
+    randEvs.emplace("CEO Expanded the Store", map2);
+    eventID.emplace(2, "CEO Expanded the Store");
+
+    map<string, double> map3;
+    map3.emplace("Max Capacity", 0.9);
+    randEvs.emplace("CEO Wants a Coffee Shop In-Store", map3);
+    eventID.emplace(3, "CEO Wants a Coffee Shop In-Store");    
 
 }
 
@@ -71,7 +81,7 @@ map<string, double> Events::randomEvent()
 {
     random_device rd;
     default_random_engine generator(rd());
-    uniform_int_distribution<int> distribution(0, 1);
+    uniform_int_distribution<int> distribution(0, 3);
     int id = distribution(generator);
     map<string, double> toReturn;
     string event = eventID[id];

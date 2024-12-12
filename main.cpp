@@ -45,7 +45,6 @@ int main()
     {
         if(week == 1 && !eve)
         {
-            cout << "THIS RAN\n";
             myStore.random();
             eve = true;
         }
