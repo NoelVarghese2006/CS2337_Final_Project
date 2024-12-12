@@ -11,6 +11,7 @@ int main()
 {
     int week = 4;
     bool quit = false;
+    bool eve = false;
     //Intro Text
     cout << "Hello!\n";
     cout << "This is a simulation of a store. The goal is to gain a profit.\n";
@@ -42,6 +43,16 @@ int main()
     options += "Task: ";
     while(!quit)
     {
+        if(week == 1 && !eve)
+        {
+            cout << "THIS RAN\n";
+            myStore.random();
+            eve = true;
+        }
+        if(week != 1)
+        {
+            eve = false;
+        }
         string keyword;
         options[5] = 48 + week;
         cout << options;

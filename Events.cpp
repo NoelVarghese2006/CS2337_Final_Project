@@ -72,7 +72,10 @@ map<string, double> Events::randomEvent()
     random_device rd;
     default_random_engine generator(rd());
     uniform_int_distribution<int> distribution(0, 1);
-    cout << distribution(generator);
-    map<string, double> hey;
-    return hey;
+    int id = distribution(generator);
+    map<string, double> toReturn;
+    string event = eventID[id];
+    toReturn = randEvs[event];
+    cout << "EVENT: " << event << endl;
+    return toReturn;
 }
