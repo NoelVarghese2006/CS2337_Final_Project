@@ -33,7 +33,15 @@ void Item::addCount(int c)
 {
     count += c;
 }
-void Item::setPrice(int np)
+void Item::setPrice(double np)
 {
     price = np;
+}
+void Item::setEqualibrium(double e)
+{
+    equalibrium = e;
+}
+void Item::setSupplyCost(double s)
+{
+    supplyCost = s;
 }

@@ -143,18 +143,58 @@ void Store::random()
 {
     map<string, double> mods = event.randomEvent();
     auto isCash = mods.find("Cash");
+    auto isMaxCap = mods.find("Max Capacity");
+    auto isDemand = mods.find("Demand");
     if(isCash != mods.end())
     {
         cout << "Cash: " << cash;
         cash *= isCash->second;
         cout << " -> " << cash << endl;
     }
-    auto isMaxCap = mods.find("Max Capacity");
-    if(isMaxCap != mods.end())
+    else if(isMaxCap != mods.end())
     {
         cout << "Max Capacity: " << maxCapacity;
         maxCapacity *= isMaxCap->second;
         cout << " -> " << maxCapacity << endl;
+    }
+    else if(isDemand != mods.end())
+    {
+        string ups = "/\\ Value: ";
+        string downs = "\\/ Value: ";
+        for(Item& i : items)
+        {
+            i.setEqualibrium(i.getEqualibrium() * mods.at(i.getName()));
+            event.setFrequency(i.getName(), event.getFrequency(i.getName()) * mods.at(i.getName()));
+            if(mods.at(i.getName()) > 1)
+            {
+                ups += i.getName() + " ";
+            }
+            else
+            {
+                downs += i.getName() + " ";
+            }
+        }
+        cout << ups << endl;
+        cout << downs << endl;
+    }
+    else
+    {
+        string ups = "\\/ Cost: ";
+        string downs = "/\\ Cost: ";
+        for(Item& i : items)
+        {
+            i.setSupplyCost(i.getSupplyCost() * mods.at(i.getName()));
+            if(mods.at(i.getName()) < 1)
+            {
+                ups += i.getName() + " ";
+            }
+            else
+            {
+                downs += i.getName() + " ";
+            }
+        }
+        cout << ups << endl;
+        cout << downs << endl;
     }
 }
 

@@ -18,8 +18,10 @@ class Item
         double getEqualibrium();
         int getCount();
 
-        void setPrice(int np);
+        void setPrice(double np);
         void addCount(int c);
+        void setEqualibrium(double e);
+        void setSupplyCost(double s);
 
         
 
