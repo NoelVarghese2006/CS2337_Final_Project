@@ -24,7 +24,11 @@ int main()
     cin >> temp;
     if(temp == "h")
     {
-        cout << "Ill do this later\n";
+        cout << "Buying Goods: Customers want to buy all their goods at one place, diversifying in a good idea\n";
+        cout << "If you feel that that your running out of stock too quickely, try increasing the price of a good.\n";
+        cout << "People may flock your store if you have too many expensive goods, try to limit how many of those you buy. Or else your store may end up less customers than you started.\n";
+        cout << "There are 12 events: 4 affect the store, 4 affect demand, and 4 affect production costs.\n";
+
         cout << "Enter any key to continue: ";
         cin >> temp;
     }
@@ -107,25 +111,20 @@ int main()
         }
         else if(keyword == "p")
         {
-            cout << "Enter the catagory you want to set: ";
-            string cat;
-            cin >> cat;
-            double eb = myStore.getEqualibrium(cat);
-            double p = myStore.getPrice(cat);
-            if(eb < 0)
+            cout << "One Catagory? Enter [c]; or all catagories? Enter [a]: ";
+            cin >> keyword;
+            if(keyword == "c")
             {
-                cout << "[" << cat << "] is not a catagory\n";
+                cout << "Enter the catagory you want to set: ";
+                string cat;
+                cin >> cat;
+                myStore.setPrice(cat);
             }
-            else
+            else if(keyword == "a")
             {
-                cout << "Current Market Value is: " + to_string(eb) << endl;
-                cout << "Current Price is: " + to_string(p) << endl;
-                cout << "New Price: ";
-                int count;
-                cin >> count;
-                myStore.setPrice(cat, count);
-                cout << "Price Change Completed\n";
+                myStore.setPriceAll();
             }
+            
         }
         else if(keyword == "x")
         {

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <iomanip>
 
 Store::Store(int m, int c)
 {
@@ -65,14 +66,32 @@ void Store::buyAll()
     }
 }
 
-void Store::setPrice(string str, double np)
+void Store::setPrice(string str)
 {
     for(Item& i : items)
     {
         if(i.getName() == str)
         {
-            i.setPrice(np);
+            cout << i.getName() << endl;
+            cout << "============" << endl;
+            cout << "Current Market Value is: " << i.getEqualibrium() << endl;
+            cout << "Current Price is: "<< i.getPrice() << endl;
+            cout << "New Price: ";
+            int count;
+            cin >> count;
+            i.setPrice(count);
+            cout << "Price Change Completed\n";
+            return;
         }
+    }
+    cout << "[" << str << "] is not a catagory\n";
+}
+
+void Store::setPriceAll()
+{
+    for(Item i : items)
+    {
+        setPrice(i.getName());
     }
 }
 
@@ -159,8 +178,8 @@ void Store::random()
     }
     else if(isDemand != mods.end())
     {
-        string ups = "/\\ Value: ";
-        string downs = "\\/ Value: ";
+        string ups = "/\\ Demand: ";
+        string downs = "\\/ Demand: ";
         for(Item& i : items)
         {
             i.setEqualibrium(i.getEqualibrium() * mods.at(i.getName()));
@@ -236,19 +255,19 @@ void Store::summary()
 {
     cout << "STORE\n";
     cout << "=====\n";
-    cout << "CASH: " << to_string(cash) << "\n";
+    cout << "CASH: " << setprecision(2) << fixed << cash << endl;
     for(Item i : items)
     {
-        cout << i.getName() << ": " << i.getCount() << endl;
+        cout << left << setw(12) << i.getName() << ": " << i.getCount() << endl;
     }
 }
 
 void Store::itemSummary()
 {
-    cout << "CATAGORY    SUPPLY_PRICE     PRICE    EQUALIBRIUM\n";
+    cout << "CATAGORY     SUPPLY_PRICE  PRICE      EQUALIBRIUM\n";
     cout << "=================================================\n";
     for(Item i : items)
     {
-        cout << i.getName() << ": " << i.getSupplyCost() << ", " << i.getPrice() << ", " << i.getEqualibrium() << endl;
+        cout << left << setw(13) << i.getName() << fixed <<  setprecision(2) << setw(14) << i.getSupplyCost() << setw(11) << i.getPrice() << i.getEqualibrium() << endl;
     }
 }

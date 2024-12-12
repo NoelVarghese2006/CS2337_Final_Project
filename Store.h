@@ -13,7 +13,8 @@ class Store
         //modifiers
         void buyItems(string str = "", int c = 0);
         void buyAll();
-        void setPrice(string str = "", double np = 0);
+        void setPrice(string str = "");
+        void setPriceAll();
         void simulation();
         void random();
         void setPeople(int c);

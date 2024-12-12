@@ -126,18 +126,6 @@ Events::Events()
     map<string, double> map11;
     map11.emplace("Groceries", 1.1);
     map11.emplace("Clothing", 1.1);
-    map11.emplace("Electronics", .9);
-    map11.emplace("Health", 1.1);
-    map11.emplace("Furniture", .9);
-    map11.emplace("Office", .9);
-    map11.emplace("Toys", 1.1);
-    map11.emplace("Outdoors", .9);
-    randEvs.emplace("Small Goods Tarrif", map11);
-    eventID.emplace(11, "Small Goods Tarrif");
-
-    map<string, double> map11;
-    map11.emplace("Groceries", 1.1);
-    map11.emplace("Clothing", 1.1);
     map11.emplace("Electronics", 1.1);
     map11.emplace("Health", .9);
     map11.emplace("Furniture", .9);
